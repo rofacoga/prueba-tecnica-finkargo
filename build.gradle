@@ -1,0 +1,43 @@
+allprojects {
+    group = 'com.finkargo'
+    version = '0.0.1-SNAPSHOT'
+
+    ext {
+        archunitVersion = "1.0.0"
+        springbootVersion = "2.7.4"
+    }
+
+    buildscript {
+        repositories {
+            mavenCentral()
+        }
+        dependencies {
+            classpath 'org.springframework.boot:spring-boot-gradle-plugin:2.0.5.RELEASE'
+        }
+    }
+
+    // apply plugin: 'org.springframework.boot'
+    apply plugin: 'java'
+
+    sourceCompatibility = 1.17
+    targetCompatibility = 1.17
+    compileJava.options.encoding = 'UTF-8'
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        testImplementation "org.springframework.boot:spring-boot-starter-test:${springbootVersion}"
+        testImplementation "com.tngtech.archunit:archunit-junit5:${archunitVersion}"
+    }
+
+    tasks.withType(JavaCompile) {
+        options.encoding = 'UTF-8'
+    }
+
+    test {
+        systemProperty "file.encoding", "utf-8"
+        useJUnitPlatform()
+    }
+}
