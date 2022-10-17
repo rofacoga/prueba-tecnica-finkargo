@@ -15,6 +15,7 @@ public final class ServicioPersona {
 
     public EntidadPersona buscarPorIdentificacion(String identificacion) {
         ValidadorDatos.validarCampo(identificacion, "identificacion");
+        ValidadorDatos.validarIdentificacion(identificacion);
 
         return this.repositorio.buscarPorIdentificacion(identificacion);
     }

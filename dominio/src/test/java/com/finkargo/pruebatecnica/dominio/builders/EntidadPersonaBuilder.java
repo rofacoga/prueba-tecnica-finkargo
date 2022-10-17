@@ -41,4 +41,9 @@ public class EntidadPersonaBuilder {
         this.numeroIdentificacion = numeroIdentificacion;
         return this;
     }
+
+    public EntidadPersonaBuilder conNombres(String nombres) {
+        this.nombres = nombres;
+        return this;
+    }
 }

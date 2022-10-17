@@ -18,37 +18,34 @@ public final class ValidadorDatos {
 
     public static void validarSoloLetras(String campo, String nombreCampo) {
         var regexPattern = "^[a-zA-Z]+$";
-        var isMatches = Pattern.compile(regexPattern).matcher(campo).matches();
-
-        if (!isMatches) {
-            throw new ExcepcionDeNegocio(String.format("El valor '%s' del campo %s no es valido.", campo, nombreCampo));
-        }
+        validarRegex(regexPattern, campo, nombreCampo);
     }
 
     public static void validarSoloNumerosYLetras(String campo, String nombreCampo) {
         var regexPattern = "^[a-zA-Z0-9]+$";
-        var isMatches = Pattern.compile(regexPattern).matcher(campo).matches();
-
-        if (!isMatches) {
-            throw new ExcepcionDeNegocio(String.format("El valor '%s' del campo %s no es valido.", campo, nombreCampo));
-        }
+        validarRegex(regexPattern, campo, nombreCampo);
     }
 
     public static void validarSoloLetrasConEspacios(String campo, String nombreCampo) {
         var regexPattern = "^[a-zA-Z]+(?:[ ][a-zA-Z]+)*$";
-        var isMatches = Pattern.compile(regexPattern).matcher(campo).matches();
+        validarRegex(regexPattern, campo, nombreCampo);
+    }
 
-        if (!isMatches) {
-            throw new ExcepcionDeNegocio(String.format("El valor '%s' del campo %s no es valido.", campo, nombreCampo));
-        }
+    public static void validarIdentificacion(String identificacion) {
+        var regexPattern = "^[a-zA-Z]{1,10}[a-zA-Z0-9]{1,20}$";
+        validarRegex(regexPattern, identificacion, "identificacion");
     }
 
     public static void validarEmail(String email) {
         var regexPattern = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
-        var isMatches = Pattern.compile(regexPattern).matcher(email).matches();
+        validarRegex(regexPattern, email, "email");
+    }
+
+    private static void validarRegex( String regexPattern, String campo, String nombreCampo) {
+        var isMatches = Pattern.compile(regexPattern).matcher(campo).matches();
 
         if (!isMatches) {
-            throw new ExcepcionDeNegocio(String.format("El valor '%s' del campo email no es valido.", email));
+            throw new ExcepcionDeNegocio(String.format("El valor '%s' del campo %s no es valido.", campo, nombreCampo));
         }
     }
 }
