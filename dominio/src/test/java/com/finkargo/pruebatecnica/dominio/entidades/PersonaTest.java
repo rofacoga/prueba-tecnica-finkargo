@@ -299,4 +299,26 @@ class PersonaTest {
                     exc.getMessage());
         }
     }
+
+
+    @Test
+    void testConstruirPersonaCorrectamente() {
+        // Arrange
+        String tipoIdentificacion = "CE";
+        String numeroIdentificacion = "a142689";
+        String identificacion = tipoIdentificacion + numeroIdentificacion;
+        String nombres = "Hassan de Jesus";
+        String apellidos = "Vargas Cobre";
+        String email = "correo@finkargo.co";
+
+        Persona persona = new Persona(tipoIdentificacion, numeroIdentificacion, nombres, apellidos, email);
+
+        // Assert
+        Assertions.assertEquals(tipoIdentificacion, persona.getTipoIdentificacion());
+        Assertions.assertEquals(numeroIdentificacion, persona.getNumeroIdentificacion());
+        Assertions.assertEquals(identificacion, persona.getIdentificacion());
+        Assertions.assertEquals(nombres, persona.getNombres());
+        Assertions.assertEquals(apellidos, persona.getApellidos());
+        Assertions.assertEquals(email, persona.getEmail());
+    }
 }

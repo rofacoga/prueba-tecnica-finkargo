@@ -43,6 +43,10 @@ public class Persona {
         this.numeroIdentificacion = numeroIdentificacion;
     }
 
+    public String getIdentificacion() {
+        return this.tipoIdentificacion + this.numeroIdentificacion;
+    }
+
     public String getNombres() {
         return nombres;
     }
