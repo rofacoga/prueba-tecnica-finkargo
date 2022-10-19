@@ -2,6 +2,7 @@ package com.finkargo.pruebatecnica.dominio.servicios;
 
 import com.finkargo.pruebatecnica.dominio.builders.EntidadPersonaBuilder;
 import com.finkargo.pruebatecnica.dominio.excepciones.ExcepcionDeNegocio;
+import com.finkargo.pruebatecnica.dominio.excepciones.ExcepcionObjetoExistente;
 import com.finkargo.pruebatecnica.dominio.repositorios.RepositorioPersona;
 import com.finkargo.pruebatecnica.dominio.repositorios.entidades.EntidadPersona;
 import org.junit.jupiter.api.Assertions;
@@ -11,6 +12,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 
 import java.util.List;
+import java.util.Optional;
 
 class ServicioPersonaTest {
 
@@ -32,8 +34,9 @@ class ServicioPersonaTest {
         final String tipoIdentificacion = "CC";
         final String numeroIdentificacion = "1094956";
         final String identificacion = tipoIdentificacion + numeroIdentificacion;
+        final EntidadPersona build = EntidadPersonaBuilder.getInstance().conIdentificacion(tipoIdentificacion, numeroIdentificacion).build();
         Mockito.when(this.repositorio.buscarPorIdentificacion(identificacion))
-                .thenReturn(EntidadPersonaBuilder.getInstance().conIdentificacion(tipoIdentificacion, numeroIdentificacion).build());
+                .thenReturn(Optional.of(build));
 
         // Act
         EntidadPersona entidad = this.servicio.buscarPorIdentificacion(identificacion);
@@ -210,6 +213,41 @@ class ServicioPersonaTest {
         } catch (ExcepcionDeNegocio exc) {
             // Assert
             Assertions.assertEquals(String.format("El valor '%s' del campo email no es valido.", email), exc.getMessage());
+        }
+    }
+
+
+    @Test
+    void testAgregarBien() {
+        // Arrange
+        final EntidadPersona entidad = EntidadPersonaBuilder.getInstance().build();
+        Mockito.when(this.repositorio.insertar(entidad)).thenReturn(entidad);
+
+        // Act
+        EntidadPersona entidadResultado = this.servicio.agregar(entidad);
+
+        // Assert
+        Assertions.assertNotNull(entidadResultado);
+        Assertions.assertEquals(entidad.getIdentificacion(), entidadResultado.getIdentificacion());
+        Assertions.assertEquals(entidad.getEmail(), entidadResultado.getEmail());
+    }
+
+    @Test
+    void testAgregarExistente() {
+        // Arrange
+        final EntidadPersona entidad = EntidadPersonaBuilder.getInstance().build();
+        Mockito.when(this.repositorio.buscarPorIdentificacion(entidad.getIdentificacion()))
+                .thenReturn(Optional.of(entidad));
+
+        try {
+            // Act
+            this.servicio.agregar(entidad);
+
+        } catch (ExcepcionObjetoExistente exc) {
+            // Assert
+            Assertions.assertEquals(
+                    String.format("Ya se encuentra registrada una persona con identificacion '%s'.", entidad.getIdentificacion()),
+                    exc.getMessage());
         }
     }
 }

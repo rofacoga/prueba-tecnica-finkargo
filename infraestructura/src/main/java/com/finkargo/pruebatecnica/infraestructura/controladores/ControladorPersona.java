@@ -6,6 +6,7 @@ import com.finkargo.pruebatecnica.aplicacion.casosdeuso.personas.CasoDeUsoBuscar
 import com.finkargo.pruebatecnica.aplicacion.casosdeuso.personas.CasoDeUsoBuscarPersonaPorNombres;
 import com.finkargo.pruebatecnica.dominio.entidades.Persona;
 import com.finkargo.pruebatecnica.dominio.repositorios.entidades.EntidadPersona;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
@@ -32,7 +33,8 @@ public class ControladorPersona {
         this.buscarPorNombres = buscarPorNombres;
     }
 
-    @PostMapping()
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     @Transactional
     public @ResponseBody EntidadPersona agregar(@Validated @RequestBody Persona persona) {
         return this.agregar.ejecutar(persona);

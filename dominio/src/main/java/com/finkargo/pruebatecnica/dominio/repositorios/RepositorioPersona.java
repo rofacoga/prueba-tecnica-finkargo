@@ -4,10 +4,11 @@ import com.finkargo.pruebatecnica.dominio.entidades.Persona;
 import com.finkargo.pruebatecnica.dominio.repositorios.entidades.EntidadPersona;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface RepositorioPersona {
 
-    EntidadPersona buscarPorIdentificacion(String identificacion);
+    Optional<EntidadPersona> buscarPorIdentificacion(String identificacion);
 
     List<EntidadPersona> buscarPorNombres(String nombres);
 
