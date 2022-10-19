@@ -2,6 +2,7 @@ package com.finkargo.pruebatecnica.infraestructura.repositorios;
 
 import com.finkargo.pruebatecnica.dominio.entidades.Persona;
 import com.finkargo.pruebatecnica.dominio.excepciones.ExcepcionObjetoNoEncontrado;
+import com.finkargo.pruebatecnica.dominio.excepciones.ExcepcionTecnica;
 import com.finkargo.pruebatecnica.dominio.repositorios.RepositorioPersona;
 import com.finkargo.pruebatecnica.dominio.repositorios.entidades.EntidadPersona;
 import com.finkargo.pruebatecnica.infraestructura.repositorios.entidades.EntidadPersonaJPA;
@@ -55,7 +56,7 @@ public interface RepositorioPersonaJPA extends RepositorioPersona, JpaRepository
     default EntidadPersona insertar(Persona persona) {
         return Optional.of(save(EntidadPersonaMapeador.mapear(persona)))
                 .map(EntidadPersonaMapeador::mapear)
-                .orElseThrow(() -> new ExcepcionObjetoNoEncontrado(
+                .orElseThrow(() -> new ExcepcionTecnica(
                         String.format(ERROR_NO_SE_HA_LOGRADO_AGREGAR_PERSONA_CON,
                                 persona.getTipoIdentificacion(), persona.getNumeroIdentificacion())));
     }

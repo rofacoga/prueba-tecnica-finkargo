@@ -3,6 +3,7 @@ package com.finkargo.pruebatecnica.infraestructura.controladores;
 import com.finkargo.pruebatecnica.dominio.excepciones.ExcepcionDeNegocio;
 import com.finkargo.pruebatecnica.dominio.excepciones.ExcepcionObjetoExistente;
 import com.finkargo.pruebatecnica.dominio.excepciones.ExcepcionObjetoNoEncontrado;
+import com.finkargo.pruebatecnica.dominio.excepciones.ExcepcionTecnica;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.http.HttpStatus;
@@ -52,9 +53,15 @@ public class ManejadorExcepciones {
     }
 
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<String> manejoDataAccessException(Exception ex) {
+    public ResponseEntity<String> manejoException(Exception ex) {
         LOGGER.error(ex);
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(MENSAJE_PROBLEMAS_CON_LA_ACCION_A_REALIZAR);
+    }
+
+    @ExceptionHandler(ExcepcionTecnica.class)
+    public ResponseEntity<String> manejoExcepcionTecnica(ExcepcionTecnica ex) {
+        LOGGER.error(ex);
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(MENSAJE_POR_DEFECTO);
     }
 
 
