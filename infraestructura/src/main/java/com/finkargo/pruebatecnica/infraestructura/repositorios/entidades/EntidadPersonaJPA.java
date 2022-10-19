@@ -8,7 +8,9 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
-@Table(name = "personas")
+@Table(name = "personas",
+        uniqueConstraints = {@UniqueConstraint(columnNames = {"tipo_identificacion", "numero_identificacion"})}
+)
 public class EntidadPersonaJPA {
 
     @Id
