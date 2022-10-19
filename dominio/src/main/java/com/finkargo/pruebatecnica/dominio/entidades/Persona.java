@@ -9,7 +9,7 @@ public class Persona {
     private String apellidos;
     private String email;
 
-    Persona() {
+    protected Persona() {
         // Constructor por defecto
     }
 

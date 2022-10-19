@@ -14,6 +14,6 @@ public class CasoDeUsoAgregarPersona {
     }
 
     public EntidadPersona ejecutar(Persona persona) {
-        return this.servicio.insertar(persona);
+        return this.servicio.agregar(persona);
     }
 }
