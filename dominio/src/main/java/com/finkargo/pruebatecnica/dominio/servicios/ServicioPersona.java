@@ -1,7 +1,6 @@
 package com.finkargo.pruebatecnica.dominio.servicios;
 
 import com.finkargo.pruebatecnica.dominio.entidades.Persona;
-import com.finkargo.pruebatecnica.dominio.excepciones.ExcepcionDeNegocio;
 import com.finkargo.pruebatecnica.dominio.excepciones.ExcepcionObjetoExistente;
 import com.finkargo.pruebatecnica.dominio.excepciones.ExcepcionObjetoNoEncontrado;
 import com.finkargo.pruebatecnica.dominio.repositorios.RepositorioPersona;
