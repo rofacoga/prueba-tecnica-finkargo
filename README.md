@@ -25,5 +25,9 @@ Como siempre sabemos que las aplicaciones tienden a mejorar cada día, y como se
 * Manejo de las peticiones recibidas a través de GraphQL.
 
 ---
-#### Referencias:
+#### Referencias
 * [Implementando DDD y Arquitectura Hexagonal en PHP con Laravel](https://fabio-schettino.medium.com/implementando-ddd-y-arquitectura-hexagonal-en-php-con-laravel-bc2d737b8460)
+
+---
+#### Anexo de tiempo gastado en el desarrollo del proyecto
+* [Registro de tiempos](https://docs.google.com/spreadsheets/d/1j5ERlkMYtfqDWUrci7H8qtxVEm1GzCumvFCnAJa1fbc)
