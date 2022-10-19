@@ -36,14 +36,8 @@ public class EntidadPersonaBuilder {
         return new EntidadPersona(tipoIdentificacion, numeroIdentificacion, nombres, apellidos, email, id, fechaCreacion);
     }
 
-    public EntidadPersonaBuilder conIdentificacion(String tipoIdentificacion, String numeroIdentificacion) {
-        this.tipoIdentificacion = tipoIdentificacion;
+    public EntidadPersonaBuilder conNumeroIdentificacion(String numeroIdentificacion) {
         this.numeroIdentificacion = numeroIdentificacion;
-        return this;
-    }
-
-    public EntidadPersonaBuilder conNombres(String nombres) {
-        this.nombres = nombres;
         return this;
     }
 }

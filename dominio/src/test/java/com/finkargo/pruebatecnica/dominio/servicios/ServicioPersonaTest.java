@@ -2,6 +2,7 @@ package com.finkargo.pruebatecnica.dominio.servicios;
 
 import com.finkargo.pruebatecnica.dominio.builders.EntidadPersonaBuilder;
 import com.finkargo.pruebatecnica.dominio.excepciones.ExcepcionDeNegocio;
+import com.finkargo.pruebatecnica.dominio.excepciones.ExcepcionObjetoExistente;
 import com.finkargo.pruebatecnica.dominio.repositorios.RepositorioPersona;
 import com.finkargo.pruebatecnica.dominio.repositorios.entidades.EntidadPersona;
 import org.junit.jupiter.api.Assertions;
@@ -242,10 +243,10 @@ class ServicioPersonaTest {
             // Act
             this.servicio.agregar(entidad);
 
-        } catch (ExcepcionDeNegocio exc) {
+        } catch (ExcepcionObjetoExistente exc) {
             // Assert
             Assertions.assertEquals(
-                    String.format("Se ha encontrado una persona con identificacion '%s'.", entidad.getIdentificacion()),
+                    String.format("Ya se encuentra registrada una persona con identificacion '%s'.", entidad.getIdentificacion()),
                     exc.getMessage());
         }
     }
