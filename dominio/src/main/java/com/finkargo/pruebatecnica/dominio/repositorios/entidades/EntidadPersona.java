@@ -11,6 +11,11 @@ public class EntidadPersona extends Persona {
     private LocalDateTime fechaActualizacion;
     private LocalDateTime fechaEliminacion;
 
+    public EntidadPersona() {
+        super();
+        // Constructor por defecto
+    }
+
     public EntidadPersona(String tipoIdentificacion, String numeroIdentificacion, String nombres, String apellidos,
                           String email, String id, LocalDateTime fechaCreacion, LocalDateTime fechaActualizacion,
                           LocalDateTime fechaEliminacion) {

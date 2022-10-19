@@ -33,11 +33,9 @@ public interface RepositorioPersonaJPA extends RepositorioPersona, JpaRepository
     Optional<EntidadPersonaJPA> findByEmailIgnoreCaseAndFechaEliminacion(String email, LocalDateTime fechaEliminacion);
 
 
-    default EntidadPersona buscarPorIdentificacion(String identificacion) {
+    default Optional<EntidadPersona> buscarPorIdentificacion(String identificacion) {
         return findByTipoIdentificacionConcatNumeroIdentificacion(identificacion)
-                .map(EntidadPersonaMapeador::mapear)
-                .orElseThrow(() -> new ExcepcionObjetoNoEncontrado(
-                        String.format(ERROR_NO_SE_HA_ENCONTRADO_NINGUNA_PERSONA_CON, "identificación", identificacion)));
+                .map(EntidadPersonaMapeador::mapear);
     }
 
     default List<EntidadPersona> buscarPorNombres(String nombres) {
